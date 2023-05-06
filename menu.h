@@ -50,7 +50,7 @@ class Menu : private Database {
             ch = _getch();
             switch (ch) {
                 case UP:
-                    selected_index = (selected_index - 1) % lines.size();
+                    selected_index = (selected_index + lines.size() - 1) % lines.size();
                     break;
                 case DOWN:
                     selected_index = (selected_index + 1) % lines.size();
