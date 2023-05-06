@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #define XCONST 2
 #define YCONST 1
