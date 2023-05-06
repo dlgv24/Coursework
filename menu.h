@@ -328,7 +328,7 @@ class Menu : private Database {
             } else if (selected_index == 9) {
                 tmp_str = prompt_box({"Введите номер зачетной книжки:"});
                 if (copied_record.set_record_book_number(
-                        tmp_str, record_book_number_in_database(copied_record.get_record_book_number())))
+                        tmp_str, record_book_number_in_database(tmp_str)))
                     alert_box({"Вы неправильно ввели номер зачетной книжки!"});
                 else
                     alert_box({"Номер зачетной книжки изменен."});
@@ -354,16 +354,17 @@ class Menu : private Database {
 
     void list_of_student_records() {
         int count = count_of_records();
-        List<std::string> lines = {"Выход"};
-        for (int i = 0; i < count; i++) {
-            Student record = get_record(i);
-            lines.push_back(record.get_surname() + " " + record.get_name()[0] + "." +
-                            record.get_patronymic()[0] + ". " + record.get_record_book_number() + " " +
-                            record.get_start_year());
-        }
+        List<std::string> lines;
         bool exit = false;
         short selected_index, save_index;
         while (!exit) {
+            lines.push_back("Выход");
+            for (int i = 0; i < count; i++) {
+                Student record = get_record(i);
+                lines.push_back(record.get_surname() + " " + record.get_name()[0] + "." +
+                                record.get_patronymic()[0] + ". " + record.get_record_book_number() + " " +
+                                record.get_start_year());
+            }
             selected_index = menu_box(lines);
             if (selected_index == 0) {
                 exit = true;
@@ -380,6 +381,7 @@ class Menu : private Database {
                     }
                 }
             }
+            lines.clear();
         }
     }
 
