@@ -1,10 +1,10 @@
 ﻿#pragma once
 
-#include <string>
-#include <sstream>
-#include <iostream>
 #include <fstream>
 #include <locale>
+#include <sstream>
+#include <string>
+
 #include "list.h"
 
 typedef struct s_date {
@@ -33,7 +33,7 @@ typedef struct s_student {
 } t_student;
 
 class Student {
-private:
+   private:
     t_student student;
 
     bool str_is_digit(std::string str) {
@@ -49,7 +49,8 @@ private:
         }
         return true;
     }
-public:
+
+   public:
     Student() {
         student.surname[0] = 0;
         student.name[0] = 0;
@@ -71,13 +72,9 @@ public:
         }
     }
 
-    void set_student(t_student student) {
-        this->student = student;
-    }
+    void set_student(t_student student) { this->student = student; }
 
-    t_student get_student() {
-        return student;
-    }
+    t_student get_student() { return student; }
 
     bool set_surname(std::string surname) {
         if (surname.length() > 20 || !str_is_alpha(surname)) return true;
@@ -85,9 +82,7 @@ public:
         return false;
     }
 
-    std::string get_surname() {
-        return std::string(student.surname);
-    }
+    std::string get_surname() { return std::string(student.surname); }
 
     bool set_name(std::string name) {
         if (name.length() > 20 || !str_is_alpha(name)) return true;
@@ -95,9 +90,7 @@ public:
         return false;
     }
 
-    std::string get_name() {
-        return std::string(student.name);
-    }
+    std::string get_name() { return std::string(student.name); }
 
     bool set_patromymic(std::string patronymic) {
         if (patronymic.length() > 20 || !str_is_alpha(patronymic)) return true;
@@ -105,9 +98,7 @@ public:
         return false;
     }
 
-    std::string get_patronymic() {
-        return std::string(student.patronymic);
-    }
+    std::string get_patronymic() { return std::string(student.patronymic); }
 
     bool set_faculty(std::string faculty) {
         if (faculty.length() > 30) return true;
@@ -115,9 +106,7 @@ public:
         return false;
     }
 
-    std::string get_faculty() {
-        return std::string(student.faculty);
-    }
+    std::string get_faculty() { return std::string(student.faculty); }
 
     bool set_department(std::string department) {
         if (department.length() > 30) return true;
@@ -125,9 +114,7 @@ public:
         return false;
     }
 
-    std::string get_department() {
-        return std::string(student.department);
-    }
+    std::string get_department() { return std::string(student.department); }
 
     bool set_group(std::string group) {
         if (group.length() != 10) return true;
@@ -135,9 +122,7 @@ public:
         return false;
     }
 
-    std::string get_group() {
-        return std::string(student.group);
-    }
+    std::string get_group() { return std::string(student.group); }
 
     bool set_record_book_number(std::string record_book_number, bool record_book_number_in_database) {
         if (record_book_number.length() != 7 || record_book_number_in_database) return true;
@@ -145,9 +130,7 @@ public:
         return false;
     }
 
-    std::string get_record_book_number() {
-        return std::string(student.record_book_number);
-    }
+    std::string get_record_book_number() { return std::string(student.record_book_number); }
 
     bool set_start_year(std::string start_year) {
         if (start_year.length() != 4) return true;
@@ -157,9 +140,7 @@ public:
         return false;
     }
 
-    std::string get_start_year() {
-        return std::to_string(student.start_year);
-    }
+    std::string get_start_year() { return std::to_string(student.start_year); }
 
     bool set_date_of_birth(std::string date_of_birth) {
         List<std::string> tmp_vector;
@@ -172,8 +153,8 @@ public:
         if (tmp_vector.size() != 3) return true;
         if (tmp_vector[0].size() < 1 || tmp_vector[0].size() > 2 || !str_is_digit(tmp_vector[0]) ||
             tmp_vector[1].size() < 1 || tmp_vector[1].size() > 2 || !str_is_digit(tmp_vector[1]) ||
-            tmp_vector[2].size() != 4 || !str_is_digit(tmp_vector[2])
-            ) return true;
+            tmp_vector[2].size() != 4 || !str_is_digit(tmp_vector[2]))
+            return true;
 
         t_date tmp_date;
         tmp_date.day = std::stoi(tmp_vector[0]);
@@ -181,7 +162,7 @@ public:
         tmp_date.year = std::stoi(tmp_vector[2]);
 
         if (tmp_date.month < 1 || tmp_date.month > 12) return true;
-        int days_in_month[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+        int days_in_month[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
         if (tmp_date.year % 400 == 0 || tmp_date.year % 4 == 0 && tmp_date.year % 100 != 0)
             days_in_month[1] = 29;
         if (tmp_date.day < 1 || tmp_date.day > days_in_month[tmp_date.month - 1]) return true;
@@ -192,22 +173,18 @@ public:
 
     std::string get_date_of_birth() {
         std::string date_of_birth = "";
-        if (student.date_of_birth.day < 10)
-            date_of_birth += "0";
+        if (student.date_of_birth.day < 10) date_of_birth += "0";
         date_of_birth += std::to_string(student.date_of_birth.day) + ".";
-        if (student.date_of_birth.month < 10)
-            date_of_birth += "0";
+        if (student.date_of_birth.month < 10) date_of_birth += "0";
         date_of_birth += std::to_string(student.date_of_birth.month) + ".";
         date_of_birth += std::to_string(student.date_of_birth.year);
         return date_of_birth;
     }
 
-    void set_sex(char sex) {
-        student.sex = sex;
-    }
+    void set_sex(char sex) { student.sex = sex; }
 
     std::string get_sex() {
-        std::string sex[] = { "Мужчина", "Женщина" };
+        std::string sex[] = {"Мужчина", "Женщина"};
         return sex[student.sex];
     }
 
@@ -226,13 +203,12 @@ public:
     }
 
     std::string get_subject_mark(short session_index, short subject_index) {
-        std::string mark[] = { "Незачет", "Зачет", "Отлично", "Хорошо", "Удовлетворительно", "Неудовлетворительно" };
+        std::string mark[] = {
+            "Незачет", "Зачет", "Отлично", "Хорошо", "Удовлетворительно", "Неудовлетворительно"};
         return mark[student.subjects[session_index][subject_index].mark];
     }
 
     friend static bool compare_start_years(Student& a, Student& b);
 };
 
-bool compare_start_years(Student& a, Student& b) {
-    return (a.student.start_year < b.student.start_year);
-}
+bool compare_start_years(Student& a, Student& b) { return (a.student.start_year < b.student.start_year); }
