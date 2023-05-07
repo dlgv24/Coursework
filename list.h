@@ -8,10 +8,7 @@ class List {
     struct Node {
         T data;
         Node* next;
-        Node(T data, Node* next) {
-            this->data = data;
-            this->next = next;
-        }
+        Node(T data, Node* next) : data(data), next(next) {}
     };
     Node* _head;
     size_t _size;

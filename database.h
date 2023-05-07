@@ -9,7 +9,6 @@
 #include "list.h"
 #include "student.h"
 
-
 class Database {
    private:
     std::string path;

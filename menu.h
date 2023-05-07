@@ -327,8 +327,7 @@ class Menu : private Database {
                     alert_box({"Название группы изменено."});
             } else if (selected_index == 9) {
                 tmp_str = prompt_box({"Введите номер зачетной книжки:"});
-                if (copied_record.set_record_book_number(
-                        tmp_str, record_book_number_in_database(tmp_str)))
+                if (copied_record.set_record_book_number(tmp_str, record_book_number_in_database(tmp_str)))
                     alert_box({"Вы неправильно ввели номер зачетной книжки!"});
                 else
                     alert_box({"Номер зачетной книжки изменен."});
