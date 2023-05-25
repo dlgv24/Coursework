@@ -41,9 +41,8 @@ class Database {
 
     bool encrypt_file(const char* fin, const char* fout, const char* passwd) {
         try {
-            CryptoPP::FileSource* file_source = new CryptoPP::FileSource(
-                fin, true, new CryptoPP::DefaultEncryptor(passwd, new CryptoPP::FileSink(fout)));
-            delete file_source;
+            CryptoPP::FileSource f(fin, true,
+                new CryptoPP::DefaultEncryptor(passwd, new CryptoPP::FileSink(fout)));
         } catch (CryptoPP::FileStore::OpenErr) {
             remove(fout);
             return false;
@@ -104,6 +103,9 @@ class Database {
             if (i != index) {
                 fin.read((char*)&rec, sizeof(t_student));
                 fout.write((char*)&rec, sizeof(t_student));
+            }
+            else {
+                fin.seekg(sizeof(t_student), std::ios::cur);
             }
         }
         fout.close();

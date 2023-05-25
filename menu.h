@@ -352,11 +352,15 @@ class Menu : private Database {
     }
 
     void list_of_student_records() {
-        int count = count_of_records();
         List<std::string> lines;
         bool exit = false;
         short selected_index, save_index;
         while (!exit) {
+            int count = count_of_records();
+            if (count == 0) {
+                alert_box({ "Нет записей." });
+                return;
+            }
             lines.push_back("Выход");
             for (int i = 0; i < count; i++) {
                 Student record = get_record(i);
@@ -375,7 +379,6 @@ class Menu : private Database {
                     if (!change_student_record(record)) set_record(record, save_index);
                 } else if (selected_index == 2) {
                     if (confirm_box({"Подтвердите удаление."})) {
-                        lines.remove(save_index + 1);
                         delete_record(save_index);
                     }
                 }
